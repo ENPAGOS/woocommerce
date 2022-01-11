@@ -1,0 +1,68 @@
+<div class="wrap dynamicore">
+
+    <h1>
+        <img
+            alt="Dynamicore"
+            src="{{ company.logo.imagotipoHorizontal|default(site_url ~ '/wp-content/plugins/dynamicore/templates/img/imagotipo-horizontal.svg') }}"
+            height="50"
+        />
+    </h1>
+
+    {% for notice in noticies %}
+    <div class="notice notice-{{ notice.level }} is-dismissible">
+        <p>{{ notice.text }}</p>
+    </div>
+    {% endfor %}
+
+    <div class="buttons">
+        <button type="submit" class="button button-primary" form="dynamicore_form_config">
+            {{ button_save.label }}
+        </button>
+    </div>
+
+    <h2 class="nav-tab-wrapper" id="dynamicore_tabs">
+        {% for tab in tabs %}
+        <a class="nav-tab{{ loop.first ? ' nav-tab-active' : '' }}" data-name="{{ tab.name }}">
+            {{ tab.label }}
+        </a>
+        {% endfor %}
+    </h2>
+
+    <form method="post" id="dynamicore_form_config" name="dynamicore_form_config">
+        {% for tab in tabs %}
+        <div id="dynamicore_tabs_{{ tab.name }}" class="tabcontent" style="display: {{ loop.first ? 'block' : 'none' }};">
+            {% for group in tab.groups %}
+            <h2>
+                <span class="dashicons dashicons-{{ group.icon }}"></span>
+                {{ group.label }}
+            </h2>
+
+            {% if group.description %}
+            <p class="description">
+                {{ group.description|join|raw }}
+            </p>
+            {% endif %}
+
+            <table class="form-table">
+                <tbody>
+                    {% set input_group = inputs|filter(input => input.group == group.name) %}
+
+                    {% for input in input_group %}
+                    <tr valign="top">
+                        <th scope="row">
+                            <label for="dynamicore_{{ input.name }}">
+                                {{ input.label }}
+                            </label>
+                        </th>
+                        <td>{{ include('field.twig', input, with_context = false) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </form>
+
+</div>

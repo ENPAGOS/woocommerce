@@ -1,0 +1,42 @@
+<div class="dynamicore-public-form" style="width: 100%; margin: 0; padding: 0; border: 0;">
+
+    <img
+        alt="Dynamicore"
+        class="logo"
+        src="{{ company.logo.imagotipoHorizontal|default(site_url ~ '/wp-content/plugins/dynamicore/templates/img/imagotipo-horizontal.svg') }}"
+        height="50"
+    />
+
+    {% for periods in paymentPeriods %}
+    <div class="card-selector" onclick="setPeriod({{ periods.value }}, this)">
+        {# <div>{{ periods.description }}</div> #}
+        <div>{{ periods.label }}</div>
+        <div><small>{{ periods.subtitle }}</small></div>
+    </div>
+    {% endfor %}
+
+    {#
+    {% for tab in tabs %}
+    {% for group in tab.groups %}
+    {% set inputs = fields|filter(input => input.group == group.value) %}
+    {% if inputs|length > 0 %}
+    <hr class="divider" />
+    <h4>{{ group.name }}</h4>
+    {% endif %}
+    #}
+
+    {% set inputs = fields %}
+    {% for field in inputs %}
+    <div style="display: {{ field.name == 'periodos' ? 'none' : 'inline-block' }}; width: 48%; border: 0; margin: 0; padding: 0;">
+        <label>{{ field.label }}</label>
+        <span class="woocommerce-input-wrapper">
+            {{ include('field.twig', field, with_context = false) }}
+        </span>
+    </div>
+    {% endfor %}
+    {#
+    {% endfor %}
+    {% endfor %}
+    #}
+
+</div>

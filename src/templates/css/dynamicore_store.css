@@ -1,0 +1,45 @@
+.payment_method_dynamicore_payments {
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+}
+
+.dynamicore-public-form .divider {
+    border-color: royalblue;
+    margin-top: 1em;
+}
+
+.dynamicore-public-form > img.logo {
+	background-color: transparent;
+}
+
+.dynamicore-public-form span.woocommerce-input-wrapper label,
+.dynamicore-public-form span.woocommerce-input-wrapper option {
+    font-size: 12px !important;
+}
+
+.dynamicore-public-form span.woocommerce-input-wrapper > input,
+.dynamicore-public-form span.woocommerce-input-wrapper > select {
+    border: 1px solid !important;
+    border-radius: 8px;
+    padding: 0.25em;
+    width: 100% !important;
+}
+
+.dynamicore-public-form div.card-selector {
+    border: 2px solid blue !important;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.5em;
+}
+
+.dynamicore-public-form div.card-selector:hover {
+    background-color: blue;
+    color: white;
+}
+
+.dynamicore-public-form div.card-selected {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+}
