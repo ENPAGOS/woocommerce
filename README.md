@@ -22,9 +22,10 @@
 
 8. Aparecera un nuevo menú con el nombre de **Enpagos**.
 9. Dar clic y establecer la configuración.
-    - Nombre a mostrar
-    - Habilitado
-    - Giro del negocio
-    - Nombre del distribuidor o tienda
+    - *Nombre a mostrar*: Etiqueta a mostrar en el checkout.
+    - *Habilitado*: Habiliar Enpagos en el checkout.
+    - *Giro del negocio*: Giro de la tienda/negocio.
+    - *Nombre del distribuidor o tienda*: Nombre distribuidor o tienda.
+10. Pulsar sobre el botón **Save settings** para guardar la configuración.
 
 ![steep-004](/docs/img/enpagos-004.png)
