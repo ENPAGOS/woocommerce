@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Build setup
+PLUGIN_NAME='enpagos'
+
+if [ ! -d build ]; then
+    mkdir build
+fi
+
+if [ -f build/"$PLUGIN_NAME".zip ]; then
+    echo -e "\033[1;31mDeleting old file\033[0m"
+    rm build/"$PLUGIN_NAME".zip
+fi
+
+# Dependencies
+if [ "$1" == "--prod" ]; then
+    echo -e "Generate production plugin"
+    rm -rf src/vendor
+    composer install --no-dev --optimize-autoloader
+else
+    composer install
+fi
+
+# Generate plugin zip file
+echo -e "\033[1;32mBuilding ZIP plugin for WooCommerce\033[0m"
+cd ./src
+zip -r ../build/"$PLUGIN_NAME".zip .
+cd ..
+
+# Install dev dependencies
+if [ "$1" == "--prod" ]; then
+    composer install
+fi

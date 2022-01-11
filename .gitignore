@@ -1,0 +1,10 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+/src/vendor/
+
+# Production
+/build
+
+cghooks.lock
+composer.lock
