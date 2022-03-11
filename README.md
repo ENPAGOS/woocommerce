@@ -32,3 +32,28 @@
 10. Pulsar sobre el botón **Save settings** para guardar la configuración.
 
 ![steep-004](/docs/img/enpagos-004.png)
+
+
+## Configuración de categorias permitidas
+
+En el campo categorías se podra especificar la categoría en la cual se desea usar el plugin.
+
+> En caso de no especificar alguna, se visualizara en todas
+
+> Se pueden agregar varias separandolas por comas
+
+![categories-001](/docs/img/categories-001.png)
+
+## Personalización de colores
+
+Dentro de la pestaña **Personalizar** podra modificar los siguientes colores
+
+![customize-colors-001](/docs/img/customize-colors-001.png)
+
+Al dar clic en cuadro de texto se mostrara el selector de color
+
+![customize-colors-002](/docs/img/customize-colors-002.png)
+
+Una vez que se elijio el color dar clic en el siguiente botón para establecerlo
+
+![customize-colors-003](/docs/img/customize-colors-003.png)
