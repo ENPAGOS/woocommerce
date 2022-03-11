@@ -5,7 +5,6 @@
 }
 
 .dynamicore-public-form .divider {
-    border-color: royalblue;
     margin-top: 1em;
 }
 
@@ -27,19 +26,11 @@
 }
 
 .dynamicore-public-form div.card-selector {
-    border: 2px solid blue !important;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 0.5em;
 }
 
-.dynamicore-public-form div.card-selector:hover {
-    background-color: blue;
-    color: white;
-}
-
 .dynamicore-public-form div.card-selected {
-    background-color: blue;
-    color: white;
     font-weight: bold;
 }

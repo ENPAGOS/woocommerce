@@ -7,36 +7,46 @@
         height="50"
     />
 
-    {% for periods in paymentPeriods %}
-    <div class="card-selector" onclick="setPeriod({{ periods.value }}, this)">
-        {# <div>{{ periods.description }}</div> #}
-        <div>{{ periods.label }}</div>
-        <div><small>{{ periods.subtitle }}</small></div>
-    </div>
-    {% endfor %}
 
-    {#
-    {% for tab in tabs %}
-    {% for group in tab.groups %}
-    {% set inputs = fields|filter(input => input.group == group.value) %}
-    {% if inputs|length > 0 %}
-    <hr class="divider" />
-    <h4>{{ group.name }}</h4>
-    {% endif %}
-    #}
+
+
+        <table cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
+            {% for periods in paymentPeriods %}
+            <tr>
+                <td align="center" width="30px">
+                    <span
+                        id="period__{{ periods.value }}"
+                        class="dashicons dashicons-saved"
+                        style="margin: 0 auto; display: none; color: #{{ theme.colors.textPrimary }}"
+                    ></span>
+                </td>
+                <td>
+                    <div class="card-selector"
+                        onclick="setPeriod({{ periods.value }}, this)"
+                        style="background-color: #{{ theme.colors.primary }}; color: #{{ theme.colors.textPrimary }}"
+                        onMouseOver="this.style.backgroundColor = '#{{ theme.colors.secondary }}'; this.style.color = '#{{ theme.colors.textSecondary }}'"
+                        onMouseOut="this.style.backgroundColor = '#{{ theme.colors.primary }}'; this.style.color = '#{{ theme.colors.textPrimary }}'"
+                    >
+                    <div>{{ periods.label }}</div>
+                    <div><small>{{ periods.subtitle }}</small></div>
+                </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
 
     {% set inputs = fields %}
     {% for field in inputs %}
-    <div style="display: {{ field.name == 'periodos' ? 'none' : 'inline-block' }}; width: 48%; border: 0; margin: 0; padding: 0;">
+    <div
+        style="display: {{ field.name == 'periodos' ? 'none' : 'inline-block' }}; width: 48%; border: 0; margin: 0; padding: 0; color: #{{ theme.colors.textPrimary }};"
+    >
         <label>{{ field.label }}</label>
         <span class="woocommerce-input-wrapper">
             {{ include('field.twig', field, with_context = false) }}
         </span>
     </div>
     {% endfor %}
-    {#
-    {% endfor %}
-    {% endfor %}
-    #}
 
 </div>

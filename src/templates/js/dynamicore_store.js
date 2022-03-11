@@ -7,5 +7,12 @@ function setPeriod(period, e) {
     	selected[i].classList.remove("card-selected");
 	}
 
+    var icons = document.getElementsByClassName("dashicons-saved");
+	for (i = 0; i < icons.length; i++) {
+        icons[i].style.display = "none";
+	}
+
 	e.classList.add("card-selected");
+
+    document.getElementById("period__" + period).style.display = "block";
 }

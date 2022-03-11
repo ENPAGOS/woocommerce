@@ -268,6 +268,15 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
             }
 
             $context['fields'] = $fields;
+            $context['theme'] = [
+                'colors' => [
+                    'primary' => get_option('dynamicore_primary_color', '0a3aa4'),
+                    'secondary' => get_option('dynamicore_secondary_color', '4868b0'),
+                    'textPrimary' => get_option('dynamicore_text_primary_color', '000000'),
+                    'textSecondary' => get_option('dynamicore_text_secondary_color', 'ffffff'),
+                ],
+            ];
+
             $template = new TemplateController();
 
             echo $template->render('payment_form.twig', $context);
