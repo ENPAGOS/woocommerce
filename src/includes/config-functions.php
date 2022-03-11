@@ -113,7 +113,7 @@ function dynamicore_config_page()
             ],
             [
                 'group' => 'general',
-                'label' => __('Nombre del distribuidor o tienda', $dynamicore_plugin_name),
+                'label' => __('Distribuidor o tienda', $dynamicore_plugin_name),
                 'name' => 'nombre_de_la_tienda',
                 'type' => 'text',
                 'value' => get_option(
@@ -122,12 +122,6 @@ function dynamicore_config_page()
                 ),
             ],
             # ============================================================================
-            // [
-            //     'group' => 'template_form',
-            //     'label' => __('Public form key', $dynamicore_plugin_name),
-            //     'name' => 'people_form_key',
-            //     'value' => $people_form_key,
-            // ],
             [
                 'group' => 'orders',
                 'label' => __('Reducción de inventario', $dynamicore_plugin_name),
@@ -158,6 +152,56 @@ function dynamicore_config_page()
                 ],
             ],
             [
+                'group' => 'orders',
+                'label' => __('Categorías (white list)', $dynamicore_plugin_name),
+                'name' => 'allow_categories',
+                'type' => 'text',
+                'value' => get_option(
+                    "{$dynamicore_plugin_name}_allow_categories",
+                    ''
+                ),
+            ],
+            [
+                'group' => 'customize_colors',
+                'label' => __('Primario', $dynamicore_plugin_name),
+                'name' => 'primary_color',
+                'type' => 'text',
+                'value' => get_option(
+                    "{$dynamicore_plugin_name}_primary_color",
+                    ''
+                ),
+            ],
+            [
+                'group' => 'customize_colors',
+                'label' => __('Secundario', $dynamicore_plugin_name),
+                'name' => 'secondary_color',
+                'type' => 'text',
+                'value' => get_option(
+                    "{$dynamicore_plugin_name}_secondary_color",
+                    ''
+                ),
+            ],
+            [
+                'group' => 'customize_colors',
+                'label' => __('Texto primario', $dynamicore_plugin_name),
+                'name' => 'text_primary_color',
+                'type' => 'text',
+                'value' => get_option(
+                    "{$dynamicore_plugin_name}_text_primary_color",
+                    ''
+                ),
+            ],
+            [
+                'group' => 'customize_colors',
+                'label' => __('Texto secundario', $dynamicore_plugin_name),
+                'name' => 'text_secondary_color',
+                'type' => 'text',
+                'value' => get_option(
+                    "{$dynamicore_plugin_name}_text_secondary_color",
+                    ''
+                ),
+            ],
+            [
                 'group' => 'webhook',
                 'label' => __('URL', $dynamicore_plugin_name),
                 'name' => 'webhook',
@@ -181,32 +225,10 @@ function dynamicore_config_page()
                 'icon' => 'admin-generic',
                 'name' => 'general',
             ],
-            // [
-            //     'description' => [
-            //         'You can view this information on the ',
-            //         '<b><a target="_BLANK" href="',
-            //         'https://admin.dynamicore.io/settings/templates/people',
-            //         '">Dynamicore dashboard</a></b>.',
-            //     ],
-            //     'icon' => 'post-status',
-            //     'label' => __('Template form', $dynamicore_plugin_name),
-            //     'name' => 'template_form',
-            // ],
         ],
     ]);
 
-    $fieldGroups = [
-        // [
-        //     'description' => [
-        //         'Map the Woocommerce order information with ',
-        //         'the equivalent fields in the Dynamicore form'
-        //     ],
-        //     'icon' => 'embed-generic',
-        //     'name' => 'dynamicore_people_form',
-        //     'label' => __('Field mapping', $dynamicore_plugin_name),
-        // ],
-    ];
-
+    $fieldGroups = [];
     if ($tabs)
     {
         foreach($tabs as $tabGroup) foreach($tabGroup['groups'] as $groupField)
@@ -217,12 +239,6 @@ function dynamicore_config_page()
             ]);
         }
     }
-
-    // array_push($context['tabs'], [
-    //     'name' => 'dynamicore_people_form',
-    //     'label' => __('Field mapping', $dynamicore_plugin_name),
-    //     'groups' => $fieldGroups,
-    // ]);
 
     array_push(
         $context['tabs'],
@@ -236,6 +252,21 @@ function dynamicore_config_page()
                     'name' => 'orders',
                 ],
             ],
+        ],
+        [
+            'name' => 'customize',
+            'label' => __('Personalizar', $dynamicore_plugin_name),
+            'groups' => [
+                [
+                    'description' => [
+                        'Personalice los colores para mostrar ',
+                        'en la pasarela de pago',
+                    ],
+                    'icon' => 'admin-customizer',
+                    'label' => __('Colores', $dynamicore_plugin_name),
+                    'name' => 'customize_colors',
+                ],
+            ]
         ],
         [
             'name' => 'notifications',
@@ -257,48 +288,45 @@ function dynamicore_config_page()
         ],
     );
 
-    // if ($fields)
-    // {
-    //     foreach ($fields as $field) {
-    //         array_push($context['inputs'], [
-    //             'group' => "dynamicore_people_form_{$field['group']}",
-    //             'label' => $field['displayname'],
-    //             'name' => "field[{$field['fieldname']}]",
-    //             'type' => 'select',
-    //             'value' => '',
-    //             'options' => [
-    //                 ['label' => 'Select an option'],
-    //                 ['label' => 'Customer->Name', 'value' => 'get_billing_first_name'],
-    //                 ['label' => 'Customer->LastName', 'value' => 'get_billing_last_name'],
-    //                 ['label' => 'Customer->Email', 'value' => 'get_billing_email'],
-    //                 ['label' => 'Customer->Phone', 'value' => 'get_billing_phone'],
-    //                 ['label' => 'Customer->Address 1', 'value' => 'get_billing_address_1'],
-    //                 ['label' => 'Customer->Address 2', 'value' => 'get_billing_address_2'],
-    //                 ['label' => 'Customer->PostalCode', 'value' => 'get_billing_postcode'],
-    //                 ['label' => 'Customer->City', 'value' => 'get_billing_city'],
-    //                 ['label' => 'Customer->State', 'value' => 'get_billing_state'],
-    //                 ['label' => 'Customer->Country', 'value' => 'get_billing_country'],
-    //                 ['label' => 'Order->Total', 'value' => 'get_total'],
-    //             ],
-    //         ]);
-    //     }
-    // }
-
+    # JS
     wp_register_script(
         'jquery_admin',
         'https://code.jquery.com/jquery-3.6.0.slim.min.js'
     );
     wp_register_script(
+        'jquery_tagify',
+        plugins_url('../lib/tagify/js/tagify.min.js', __FILE__)
+    );
+    wp_register_script(
+        'jquery_colorpicker',
+        plugins_url('../lib/colorpicker/js/colorpicker.js', __FILE__)
+    );
+    wp_register_script(
         'dynamicore_admin',
         plugins_url('../templates/js/dynamicore_admin.js', __FILE__)
+    );
+
+    wp_enqueue_script('jquery_admin');
+    wp_enqueue_script('jquery_tagify');
+    wp_enqueue_script('jquery_colorpicker');
+    wp_enqueue_script('dynamicore_admin');
+
+    # CSS
+    wp_register_style(
+        'jquery_colorpicker',
+        plugins_url('../lib/colorpicker/css/colorpicker.css', __FILE__)
+    );
+    wp_register_style(
+        'jquery_tagify',
+        plugins_url('../lib/tagify/css/tagify.css', __FILE__)
     );
     wp_register_style(
         'dynamicore_admin',
         plugins_url('../templates/css/dynamicore_admin.css', __FILE__)
     );
 
-    wp_enqueue_script('jquery_admin');
-    wp_enqueue_script('dynamicore_admin');
+    wp_enqueue_style('jquery_colorpicker');
+    wp_enqueue_style('jquery_tagify');
     wp_enqueue_style('dynamicore_admin');
 
     $template = new TemplateController();
