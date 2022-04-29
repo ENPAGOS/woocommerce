@@ -229,10 +229,8 @@ function dynamicore_config_page()
     ]);
 
     $fieldGroups = [];
-    if ($tabs)
-    {
-        foreach($tabs as $tabGroup) foreach($tabGroup['groups'] as $groupField)
-        {
+    if ($tabs) {
+        foreach ($tabs as $tabGroup) foreach ($tabGroup['groups'] as $groupField) {
             array_push($fieldGroups, [
                 'name' => "dynamicore_people_form_{$groupField['value']}",
                 'label' => $groupField['name'],

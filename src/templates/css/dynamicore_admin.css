@@ -1,16 +1,15 @@
-
 div.dynamicore {
-    user-select: none;
+  user-select: none;
 }
 
 div.dynamicore .buttons {
-    float: right;
+  float: right;
 }
 
 a.nav-tab {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #dynamicore_form_config th {
-    text-align: right;
+  text-align: right;
 }

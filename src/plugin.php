@@ -6,12 +6,12 @@
  * Description: Accept payments with Enpagos
  * Author: <a href="https://enpagos.mx/" target="_blank">Enpagos</a>
  * Author URI: https://enpagos.mx/
- * Version: 1.1.0
+ * Version: 1.2.0
  * Licence: MIT
  * Text Domain: dynamicore
  * Domain Path: /languages
  * Requires at least: 5.3
- * Requires PHP: 7.1
+ * Requires PHP: 7.2
  */
 
 require_once __DIR__ . '/controllers/DynamicoreController.php';
@@ -37,3 +37,8 @@ register_activation_hook(__FILE__, function () {
  * Main function registration for payment gateways
  */
 add_action('plugins_loaded', 'dynamicore_init', 0);
+
+/**
+ * Add after product price
+ */
+add_action('woocommerce_single_product_summary', 'dynamicore_after_product_price', 11);
