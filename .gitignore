@@ -8,3 +8,6 @@
 
 cghooks.lock
 composer.lock
+
+# Temporal files
+/tmp

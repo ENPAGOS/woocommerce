@@ -1,46 +1,48 @@
 {
-    "name": "enpagos/woocommerce",
-    "description": "Plugin para la integración de pagos",
-    "license": "MIT",
-    "readme": "README.md",
-    "type": "library",
-    "version": "1.0.0",
-    "authors": [
-        {
-            "name": "José Beltrán Solís",
-            "email": "jose@dynamicore.io"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Dynamicore\\Woocommerce\\": "src/"
-        }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "vendor-dir": "./src/vendor"
-    },
-    "require": {
-        "twig/twig": "^3.3",
-        "guzzlehttp/guzzle": "^7.4"
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.3"
-    },
-    "scripts": {
-        "clean": "rm -rf build && rm -rf src/vendor",
-        "build": "scripts/build",
-        "build_prod": "scripts/build --prod",
-        "php-cs-fixer": "src/vendor/bin/php-cs-fixer"
-    },
-    "scripts-descriptions": {
-        "clean": "Remove build and dependencies",
-        "build": "Generate plugin for WooCommerce (dev)",
-        "build_prod": "Generate plugin for WooCommerce",
-        "php-cs-fixer": "Alias for php-cs-fixer"
-    },
-    "support": {
-        "email": "support@dynamicore.io",
-        "source": "https://github.com/ENPAGOS/woocommerce"
+  "name": "enpagos/woocommerce",
+  "description": "Plugin para la integración de pagos",
+  "license": "MIT",
+  "readme": "README.md",
+  "type": "library",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "José Beltrán Solís",
+      "email": "jose@dynamicore.io"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Dynamicore\\Woocommerce\\": "src/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "vendor-dir": "./src/vendor"
+  },
+  "require": {
+    "twig/twig": "^3.3",
+    "guzzlehttp/guzzle": "^7.4"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.3"
+  },
+  "scripts": {
+    "clean": "rm -rf build && rm -rf src/vendor",
+    "build": "scripts/build",
+    "build_prod": "scripts/build --prod",
+    "php-cs-fixer": "src/vendor/bin/php-cs-fixer",
+    "start:docker": "docker-compose up"
+  },
+  "scripts-descriptions": {
+    "clean": "Remove build and dependencies",
+    "build": "Generate plugin for WooCommerce (dev)",
+    "build_prod": "Generate plugin for WooCommerce",
+    "php-cs-fixer": "Alias for php-cs-fixer",
+    "start:docker": "Run tests server for WordPress on docker"
+  },
+  "support": {
+    "email": "support@dynamicore.io",
+    "source": "https://github.com/ENPAGOS/woocommerce"
+  }
 }
