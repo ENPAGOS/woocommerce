@@ -1,4 +1,10 @@
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    hsInit("{{ shop_url }}");
+}, false);
+</script>
+
 <div class="dynamicore_div_block woocommerce_after_product_price">
     <img
         alt="Enpagos"
@@ -6,7 +12,7 @@
         src="{{ company.logo.imagotipoHorizontal|default(site_url ~ '/wp-content/plugins/enpagos/templates/img/imagotipo-horizontal.svg') }}"
         style="height: 2em;"
     />
-
+    <br />
     <span style="font-size: 1.2em;">
         Paga a plazos sin tarjeta de crédito
         <a

@@ -18,6 +18,7 @@
   },
   "config": {
     "optimize-autoloader": true,
+    "process-timeout": 0,
     "vendor-dir": "./src/vendor"
   },
   "require": {

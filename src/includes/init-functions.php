@@ -22,55 +22,65 @@ function dynamicore_init()
 
 function dynamicore_after_product_price()
 {
-    $dynamicore_panel = 'https://admin.dynamicore.io/';
     $dynamicore_plugin_name = 'dynamicore';
-    $client = new GuzzleHttp\Client([
-        # Base URI is used with relative requests
-        'base_uri' => 'https://connector.dynamicore.io',
-        # You can set any number of default request options.
-        'timeout'  => 2.0,
-    ]);
-
-    $response = $client->request('GET', "/kyc/a071db79d3d74ea9a56c0e754a69a330/check");
-    ['data' => ['company' => $company]] = json_decode($response->getBody(), true);
-
-    $context = [
-        'company' => $company,
-        'dynamicore_panel' => $dynamicore_panel,
-        'external_route' => '/public/integrations/enpagos?' . http_build_query([
-            'costo_de_producto' => get_post_meta(get_the_ID(), '_sale_price', true),
-            'giro_del_negocio' => get_option(
-                "{$dynamicore_plugin_name}_giro_del_negocio",
-                ''
-            ),
-            'nombre_de_la_tienda' => get_option(
-                "{$dynamicore_plugin_name}_nombre_de_la_tienda",
-                ''
-            ),
-            'producto' => get_the_title(get_the_ID()),
-        ]),
-        'site_url' => get_site_url(),
-    ];
-
-    # CSS
-    wp_register_style(
-        'highslide',
-        plugins_url('../lib/highslide/css/highslide.css', __FILE__)
+    $showAfterProce = get_option(
+        "{$dynamicore_plugin_name}_show_after_price",
+        false
     );
-    wp_enqueue_style('highslide');
 
-    # JS
-    wp_register_script(
-        'highslide',
-        plugins_url('../lib/highslide/js/highslide-with-html.min.js', __FILE__)
-    );
-    wp_register_script(
-        'dynamicore_product',
-        plugins_url('../templates/js/dynamicore_product.js', __FILE__)
-    );
-    wp_enqueue_script('highslide');
-    wp_enqueue_script('dynamicore_product');
+    if ($showAfterProce) {
+        $dynamicore_panel = 'https://admin.dynamicore.io';
+        $client = new GuzzleHttp\Client([
+            # Base URI is used with relative requests
+            'base_uri' => 'https://connector.dynamicore.io',
+            # You can set any number of default request options.
+            'timeout'  => 2.0,
+        ]);
 
-    $template = new TemplateController();
-    echo $template->render('after_product_price.twig', $context);
+        $response = $client->request('GET', "/kyc/a071db79d3d74ea9a56c0e754a69a330/check");
+        ['data' => ['company' => $company]] = json_decode($response->getBody(), true);
+
+        $product = wc_get_product(get_the_ID());
+
+        $context = [
+            'company' => $company,
+            'dynamicore_panel' => $dynamicore_panel,
+            'external_route' => '/public/integrations/enpagos?' . http_build_query([
+                'costo_de_producto' => $product->get_price(),
+                'giro_del_negocio' => get_option(
+                    "{$dynamicore_plugin_name}_giro_del_negocio",
+                    ''
+                ),
+                'nombre_de_la_tienda' => get_option(
+                    "{$dynamicore_plugin_name}_nombre_de_la_tienda",
+                    ''
+                ),
+                'producto' => get_the_title(get_the_ID()),
+            ]),
+            'site_url' => get_site_url(),
+            'shop_url' => wc_get_page_permalink('store'),
+        ];
+
+        # CSS
+        wp_register_style(
+            'highslide',
+            plugins_url('../lib/highslide/css/highslide.css', __FILE__)
+        );
+        wp_enqueue_style('highslide');
+
+        # JS
+        wp_register_script(
+            'highslide',
+            plugins_url('../lib/highslide/js/highslide-with-html.min.js', __FILE__)
+        );
+        wp_register_script(
+            'dynamicore_product',
+            plugins_url('../templates/js/dynamicore_product.js', __FILE__)
+        );
+        wp_enqueue_script('highslide');
+        wp_enqueue_script('dynamicore_product');
+
+        $template = new TemplateController();
+        echo $template->render('after_product_price.twig', $context);
+    }
 }

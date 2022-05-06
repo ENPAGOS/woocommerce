@@ -221,7 +221,7 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
                             : 500000 * 0.11 / 1000 * 1.16;
                         $admin_expense = 50;
 
-                        foreach ([52, 104] as $period) {
+                        foreach ([52, 78, 104] as $period) {
                             $payments = number_format($cart_total / $period + $interest + $interest_iva + $life_insurance + $admin_expense, 2);
                             array_push($fieldOptions, [
                                 'description' => "Precio incluye IVA: {$cart_total}",
@@ -308,9 +308,9 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
     {
         global $woocommerce;
 
-        foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
-            $product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
-            $terms = get_the_terms( $product_id, 'product_cat' );
+        foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+            $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
+            $terms = get_the_terms($product_id, 'product_cat');
 
             $whiteList = explode(",", get_option(
                 "dynamicore_allow_categories",

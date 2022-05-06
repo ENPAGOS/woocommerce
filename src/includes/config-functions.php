@@ -121,6 +121,20 @@ function dynamicore_config_page()
                     ''
                 ),
             ],
+            [
+                'group' => 'general',
+                'label' => __('Leyenda EnPagos', $dynamicore_plugin_name),
+                'name' => 'show_after_price',
+                'type' => 'select',
+                'value' => get_option(
+                    "{$dynamicore_plugin_name}_show_after_price",
+                    0
+                ),
+                'options' => [
+                    ['label' => __('No', $dynamicore_plugin_name), 'value' => 0],
+                    ['label' => __('Si', $dynamicore_plugin_name), 'value' => 1],
+                ],
+            ],
             # ============================================================================
             [
                 'group' => 'orders',
