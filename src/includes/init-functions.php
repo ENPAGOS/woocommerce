@@ -29,7 +29,6 @@ function dynamicore_after_product_price()
     );
 
     if ($showAfterProce) {
-        $dynamicore_panel = 'https://admin.dynamicore.io';
         $client = new GuzzleHttp\Client([
             # Base URI is used with relative requests
             'base_uri' => 'https://connector.dynamicore.io',
@@ -44,7 +43,9 @@ function dynamicore_after_product_price()
 
         $context = [
             'company' => $company,
-            'dynamicore_panel' => $dynamicore_panel,
+            'dynamicore_panel' => str_starts_with($_SERVER['HTTP_HOST'], 'localhost')
+                ? 'http://localhost:3000'
+                : 'https://admin.dynamicore.io',
             'external_route' => '/public/integrations/enpagos?' . http_build_query([
                 'costo_de_producto' => $product->get_price(),
                 'giro_del_negocio' => get_option(
@@ -56,6 +57,7 @@ function dynamicore_after_product_price()
                     ''
                 ),
                 'producto' => get_the_title(get_the_ID()),
+                'numero_de_equipos' => 1,
             ]),
             'site_url' => get_site_url(),
             'shop_url' => wc_get_page_permalink('store'),
@@ -70,6 +72,10 @@ function dynamicore_after_product_price()
 
         # JS
         wp_register_script(
+            'jquery_slim_min',
+            'https://code.jquery.com/jquery-3.6.0.slim.min.js'
+        );
+        wp_register_script(
             'highslide',
             plugins_url('../lib/highslide/js/highslide-with-html.min.js', __FILE__)
         );
@@ -77,6 +83,8 @@ function dynamicore_after_product_price()
             'dynamicore_product',
             plugins_url('../templates/js/dynamicore_product.js', __FILE__)
         );
+
+        wp_enqueue_script('jquery_slim_min');
         wp_enqueue_script('highslide');
         wp_enqueue_script('dynamicore_product');
 

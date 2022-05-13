@@ -31,14 +31,14 @@
   "scripts": {
     "clean": "rm -rf build && rm -rf src/vendor",
     "build": "scripts/build",
-    "build_prod": "scripts/build --prod",
+    "build:prod": "scripts/build --prod",
     "php-cs-fixer": "src/vendor/bin/php-cs-fixer",
     "start:docker": "docker-compose up"
   },
   "scripts-descriptions": {
     "clean": "Remove build and dependencies",
     "build": "Generate plugin for WooCommerce (dev)",
-    "build_prod": "Generate plugin for WooCommerce",
+    "build:prod": "Generate plugin for WooCommerce",
     "php-cs-fixer": "Alias for php-cs-fixer",
     "start:docker": "Run tests server for WordPress on docker"
   },
