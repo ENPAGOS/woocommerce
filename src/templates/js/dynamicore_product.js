@@ -1,3 +1,6 @@
+var HREF = '';
+var QUANTITY_ELEM;
+
 function hsInit(storeUrl = window.location.origin, href) {
   hs.graphicsDir = storeUrl + '/wp-content/plugins/enpagos/lib/highslide/img/';
   hs.wrapperClassName = 'draggable-header';
@@ -13,16 +16,12 @@ function hsInit(storeUrl = window.location.origin, href) {
   hs.marginRight = 0;
   hs.marginTop = 0;
 
-  $("input[id^='quantity_'][name='quantity']")
-    .change(function () {
-      hs.close();
+  HREF = href;
+  QUANTITY_ELEM = document.querySelector("input[id^='quantity_'][name='quantity']");
 
-      $("a[id='dynamicore_after_product_price']")
-        .attr("href", href.replace(
-          "numero_de_equipos=1",
-          "numero_de_equipos=" + $(this).val(),
-        ))
-    });
+  QUANTITY_ELEM.addEventListener('change', function () {
+    hs.close();
+  });
 }
 
 function showProductTerms(elem) {
@@ -32,6 +31,10 @@ function showProductTerms(elem) {
     objectType: 'iframe',
     preserveContent: false,
     resize: false,
+    src: HREF.replace(
+      "numero_de_equipos=1",
+      "numero_de_equipos=" + QUANTITY_ELEM.value,
+    ),
     transitions: ['fade'],
   });
 }

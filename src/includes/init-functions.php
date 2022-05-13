@@ -72,10 +72,6 @@ function dynamicore_after_product_price()
 
         # JS
         wp_register_script(
-            'jquery_slim_min',
-            'https://code.jquery.com/jquery-3.6.0.slim.min.js'
-        );
-        wp_register_script(
             'highslide',
             plugins_url('../lib/highslide/js/highslide-with-html.min.js', __FILE__)
         );
@@ -84,7 +80,6 @@ function dynamicore_after_product_price()
             plugins_url('../templates/js/dynamicore_product.js', __FILE__)
         );
 
-        wp_enqueue_script('jquery_slim_min');
         wp_enqueue_script('highslide');
         wp_enqueue_script('dynamicore_product');
 
