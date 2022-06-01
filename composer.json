@@ -29,18 +29,20 @@
     "friendsofphp/php-cs-fixer": "^3.3"
   },
   "scripts": {
-    "clean": "rm -rf build && rm -rf src/vendor",
     "build": "scripts/build",
     "build:prod": "scripts/build --prod",
+    "clean": "rm -rf build && rm -rf src/vendor",
     "php-cs-fixer": "src/vendor/bin/php-cs-fixer",
-    "start:docker": "docker-compose up"
+    "start:docker": "docker-compose up",
+    "stop:docker": "docker-compose stop"
   },
   "scripts-descriptions": {
     "clean": "Remove build and dependencies",
     "build": "Generate plugin for WooCommerce (dev)",
     "build:prod": "Generate plugin for WooCommerce",
     "php-cs-fixer": "Alias for php-cs-fixer",
-    "start:docker": "Run tests server for WordPress on docker"
+    "start:docker": "Run tests server for WordPress on docker",
+    "stop:docker": "Stop running container"
   },
   "support": {
     "email": "support@dynamicore.io",

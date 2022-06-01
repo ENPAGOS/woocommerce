@@ -312,18 +312,26 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
             $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
             $terms = get_the_terms($product_id, 'product_cat');
 
-            $whiteList = explode(",", get_option(
+            $whiteList = explode(',', get_option(
                 "dynamicore_allow_categories",
                 ''
             ));
 
             foreach ($whiteList as $key => $val) {
-                $whiteList[$key] = strtoupper(trim($val));
+                $newVal = strtoupper(trim($val));
+
+                if ($newVal === '') {
+                    unset($whiteList[$key]);
+                } else {
+                    $whiteList[$key] = $newVal;
+                }
             }
 
-            foreach ($terms as $term) {
-                if (in_array(strtoupper($term->name), $whiteList)) {
-                    return false;
+            if ($whiteList) {
+                foreach ($terms as $term) {
+                    if (!in_array(strtoupper($term->name), $whiteList)) {
+                        return false;
+                    }
                 }
             }
         }

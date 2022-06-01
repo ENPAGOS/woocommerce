@@ -23,12 +23,41 @@ function dynamicore_init()
 function dynamicore_after_product_price()
 {
     $dynamicore_plugin_name = 'dynamicore';
-    $showAfterProce = get_option(
-        "{$dynamicore_plugin_name}_show_after_price",
-        false
-    );
+    $product = wc_get_product(get_the_ID());
+    $terms = get_the_terms(get_the_ID(), 'product_cat');
 
-    if ($showAfterProce) {
+    $showAfterPrice = get_option(
+        "{$dynamicore_plugin_name}_show_after_price",
+        '0'
+    ) === '1';
+
+    if ($showAfterPrice) {
+        $whiteList = explode(',', get_option(
+            'dynamicore_allow_categories',
+            ''
+        ));
+
+        foreach ($whiteList as $key => $val) {
+            $newVal = strtoupper(trim($val));
+
+            if ($newVal === '') {
+                unset($whiteList[$key]);
+            } else {
+                $whiteList[$key] = $newVal;
+            }
+        }
+
+        if ($whiteList) {
+            foreach ($terms as $term) {
+                if (!in_array(strtoupper($term->name), $whiteList)) {
+                    $showAfterPrice = false;
+                    break;
+                }
+            }
+        }
+    }
+
+    if ($showAfterPrice) {
         $client = new GuzzleHttp\Client([
             # Base URI is used with relative requests
             'base_uri' => 'https://connector.dynamicore.io',
@@ -38,8 +67,6 @@ function dynamicore_after_product_price()
 
         $response = $client->request('GET', "/kyc/a071db79d3d74ea9a56c0e754a69a330/check");
         ['data' => ['company' => $company]] = json_decode($response->getBody(), true);
-
-        $product = wc_get_product(get_the_ID());
 
         $context = [
             'company' => $company,
