@@ -322,7 +322,7 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
             }
 
             foreach ($terms as $term) {
-                if (in_array(strtoupper($term->name), $whiteList)) {
+                if (!in_array(strtoupper($term->name), $whiteList)) {
                     return false;
                 }
             }
