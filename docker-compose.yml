@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+
   db:
     container_name: wordpress_mariadb
     image: mariadb:latest
@@ -11,6 +12,7 @@ services:
       - MYSQL_DATABASE=wordpress
       - MYSQL_USER=manager
       - MYSQL_PASSWORD=secret
+
   web:
     container_name: wordpress_server
     image: wordpress:latest
