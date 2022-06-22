@@ -97,6 +97,7 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
 
             $pii = $this->paymentData;
             $pii['costo_de_producto'] = $order->get_total();
+            $pii['numero_de_equipos'] = $order->get_item_count();
             $pii['producto'] = 'Order #' . $order_id;
             $pii['giro_del_negocio'] = get_option(
                 "dynamicore_giro_del_negocio",
@@ -128,7 +129,7 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
             );
         } catch (Exception $e) {
             $errors = [
-                'Dynamicore : Request Error [409]: ',
+                'Enpagos: Request Error [409]: ',
                 'Request Error [200]: ',
                 'Request Error [400]: '
             ];
@@ -138,7 +139,7 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
                 : $e->getMessage();
 
             wc_add_notice(
-                __('Dynamicore error place order:<br/>' . $message, 'dynamicore'),
+                __('Enpagos error place order:<br/>' . $message, 'dynamicore'),
                 'error'
             );
 
@@ -147,7 +148,7 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
 
         $order->update_status(
             $this->initialstate,
-            __('Dynamicore - Pending', 'dynamicore')
+            __('Enpagos - Pending', 'dynamicore')
         );
 
         if ($this->completeorder == 'init') {
@@ -176,6 +177,7 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
             }
 
             $cart_total = $woocommerce->cart->total;
+            $admin_procedures = $woocommerce->cart->get_cart_contents_count();
 
             wp_register_script(
                 'dynamicore_store',
@@ -213,13 +215,13 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
                 $fieldOptions = [];
 
                 if ($field['fieldname'] === 'periodos') {
-                    if ($cart_total <= 150000) {
+                    if ($cart_total <= 200000) {
                         $interest = $cart_total * (0.23 / 360 * 7);
                         $interest_iva = $interest * 0.16;
                         $life_insurance = $cart_total <= 500000
                             ? $cart_total * 0.11 / 1000 * 1.16
                             : 500000 * 0.11 / 1000 * 1.16;
-                        $admin_expense = 50;
+                        $admin_expense = 50 * $admin_procedures;
 
                         foreach ([52, 78, 104] as $period) {
                             $payments = number_format($cart_total / $period + $interest + $interest_iva + $life_insurance + $admin_expense, 2);
@@ -235,7 +237,7 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
                         $life_insurance = $cart_total <= 500000
                             ? $cart_total * 0.44 / 1000 * 1.16
                             : 500000 * 0.44 / 1000 * 1.16;
-                        $admin_expense = 400;
+                        $admin_expense = 400 * $admin_procedures;
 
                         foreach ([12, 24, 36, 48, 60] as $period) {
                             $payments = number_format($cart_total / $period + $interest + $life_insurance + $admin_expense, 2);
