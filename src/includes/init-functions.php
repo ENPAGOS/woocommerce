@@ -75,6 +75,10 @@ function dynamicore_after_product_price()
                 : 'https://admin.dynamicore.io',
             'external_route' => '/public/integrations/enpagos?' . http_build_query([
                 'costo_de_producto' => $product->get_price(),
+                'email_de_vendedor' => get_option(
+                    "{$dynamicore_plugin_name}_email_de_vendedor",
+                    ''
+                ),
                 'giro_del_negocio' => get_option(
                     "{$dynamicore_plugin_name}_giro_del_negocio",
                     ''
