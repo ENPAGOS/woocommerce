@@ -107,6 +107,10 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
                 "dynamicore_nombre_de_la_tienda",
                 ''
             );
+            $pii['email_de_vendedor'] = get_option(
+                "dynamicore_email_de_vendedor",
+                ''
+            );
             $pii['primer_nombre'] = $order->get_billing_first_name();
             $pii['primer_apellido'] = $order->get_billing_last_name();;
             $pii['telefono'] = $order->get_billing_phone();

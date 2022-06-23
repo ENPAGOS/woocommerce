@@ -123,6 +123,16 @@ function dynamicore_config_page()
             ],
             [
                 'group' => 'general',
+                'label' => __('Email del vendedor', $dynamicore_plugin_name),
+                'name' => 'email_de_vendedor',
+                'type' => 'email',
+                'value' => get_option(
+                    "{$dynamicore_plugin_name}_email_de_vendedor",
+                    ''
+                ),
+            ],
+            [
+                'group' => 'general',
                 'label' => __('Leyenda EnPagos', $dynamicore_plugin_name),
                 'name' => 'show_after_price',
                 'type' => 'select',
