@@ -28,7 +28,8 @@
     - *Nombre a mostrar*: Etiqueta a mostrar en el checkout.
     - *Habilitado*: Habiliar Enpagos en el checkout.
     - *Giro del negocio*: Giro de la tienda/negocio.
-    - *Nombre del distribuidor o tienda*: Nombre distribuidor o tienda.
+    - *Distribuidor o tienda*: Nombre distribuidor o tienda.
+    - *Email del vendedor*: Email de contacto del vendedor.
 10. Pulsar sobre el botón **Save settings** para guardar la configuración.
 
 ![steep-004](/docs/img/enpagos-004.png)
@@ -38,9 +39,9 @@
 
 En el campo categorías se podra especificar la categoría en la cual se desea usar el plugin.
 
-> En caso de no especificar alguna, se visualizara en todas
+> En caso de no especificar alguna, se visualizara en todas.
 
-> Se pueden agregar varias separandolas por comas
+> Se pueden agregar varias separandolas por comas.
 
 ![categories-001](/docs/img/categories-001.png)
 
