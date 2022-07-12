@@ -1,35 +1,18 @@
 {% if type == 'select' %}
-<select
-    class="regular-text"
-    id="{{ 'dynamicore_' ~ name }}"
-    name="{{ 'dynamicore_' ~ name }}"
-    title="{{ title|default(label) }}"
->
+<select class="regular-text" id="{{ 'dynamicore_' ~ name }}" name="{{ 'dynamicore_' ~ name }}"
+    title="{{ title|default(label) }}">
     {% for option in options %}
-    <option value={{ option.value }}{{ value == option.value ? ' selected' : '' }}>
+    <option value="{{ option.value }}" {{ value==option.value ? ' selected' : '' }}>
         {{ option.label }}
     </option>
     {% endfor %}
 </select>
 {% elseif type == 'textarea' %}
-<textarea
-    class="regular-text"
-    id="{{ 'dynamicore_' ~ name }}"
-    name="{{ 'dynamicore_' ~ name }}"
-    placeholder=""{{ placeholder }}""
-    {{ readonly ? 'readonly' : '' }}
-    rows="3"
-    title="{{ title|default(label) }}"
->{{ value }}</textarea>
+<textarea class="regular-text" id="{{ 'dynamicore_' ~ name }}" name="{{ 'dynamicore_' ~ name }}"
+    placeholder="{{ placeholder }}" {{ readonly ? 'readonly' : '' }} rows="3"
+    title="{{ title|default(label) }}">{{ value }}</textarea>
 {% else %}
-<input
-    class="regular-text"
-    id="{{ 'dynamicore_' ~ name }}"
-    name="{{ 'dynamicore_' ~ name }}"
-    placeholder=""{{ placeholder }}""
-    {{ readonly ? 'readonly' : '' }}
-    title="{{ title|default(label) }}"
-    type="{{ type|default('text') }}"
-    value="{{ value }}"
-/>
+<input class="regular-text" id="{{ 'dynamicore_' ~ name }}" name="{{ 'dynamicore_' ~ name }}" placeholder="" {{
+    placeholder }}"" {{ readonly ? 'readonly' : '' }} title="{{ title|default(label) }}"
+    type="{{ type|default('text') }}" value="{{ value }}" />
 {% endif %}
