@@ -144,6 +144,16 @@ function dynamicore_config_page()
             ],
             [
                 'group' => 'general',
+                'label' => __('Nombre del asesor de ventas', $dynamicore_plugin_name),
+                'name' => 'nombre_de_asesor_de_ventas',
+                'type' => 'text',
+                'value' => get_option(
+                    "{$dynamicore_plugin_name}_nombre_de_asesor_de_ventas",
+                    ''
+                ),
+            ],
+            [
+                'group' => 'general',
                 'label' => __('Email del vendedor', $dynamicore_plugin_name),
                 'name' => 'email_de_vendedor',
                 'type' => 'email',
