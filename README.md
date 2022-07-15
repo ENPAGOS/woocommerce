@@ -29,6 +29,7 @@
     - *Habilitado*: Habiliar Enpagos en el checkout.
     - *Giro del negocio*: Giro de la tienda/negocio.
     - *Distribuidor o tienda*: Nombre distribuidor o tienda.
+    - *Nombre del asesor de ventas*: Nombre predeterminado para el asesor de ventas.
     - *Email del vendedor*: Email de contacto del vendedor.
 10. Pulsar sobre el botón **Save settings** para guardar la configuración.
 
