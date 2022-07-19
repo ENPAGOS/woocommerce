@@ -83,10 +83,6 @@ function dynamicore_after_product_price()
                     "{$dynamicore_plugin_name}_email_de_vendedor",
                     ''
                 ),
-                'giro_del_negocio' => get_option(
-                    "{$dynamicore_plugin_name}_giro_del_negocio",
-                    ''
-                ),
                 'nombre_de_la_tienda' => get_option(
                     "{$dynamicore_plugin_name}_nombre_de_la_tienda",
                     ''

@@ -27,7 +27,6 @@
 9. Dar clic y establecer la configuración.
     - *Nombre a mostrar*: Etiqueta a mostrar en el checkout.
     - *Habilitado*: Habiliar Enpagos en el checkout.
-    - *Giro del negocio*: Giro de la tienda/negocio.
     - *Distribuidor o tienda*: Nombre distribuidor o tienda.
     - *Nombre del asesor de ventas*: Nombre predeterminado para el asesor de ventas.
     - *Email del vendedor*: Email de contacto del vendedor.

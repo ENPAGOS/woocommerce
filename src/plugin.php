@@ -6,7 +6,7 @@
  * Description: Accept payments with Enpagos
  * Author: <a href="https://enpagos.mx/" target="_blank">Enpagos</a>
  * Author URI: https://enpagos.mx/
- * Version: 1.4.1
+ * Version: 1.4.2
  * Licence: MIT
  * Text Domain: dynamicore
  * Domain Path: /languages
