@@ -99,10 +99,6 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
             $pii['costo_de_producto'] = $order->get_total();
             $pii['numero_de_equipos'] = $order->get_item_count();
             $pii['producto'] = 'Order #' . $order_id;
-            $pii['giro_del_negocio'] = get_option(
-                "dynamicore_giro_del_negocio",
-                ''
-            );
             $pii['nombre_de_la_tienda'] = get_option(
                 "dynamicore_nombre_de_la_tienda",
                 ''
@@ -214,6 +210,7 @@ class WC_Gateway_Dynamicore extends WC_Payment_Gateway
                 'periodos',
                 'promedio_de_ventas_semanales',
                 'creditos_actuales',
+                'giro_del_negocio',
             ];
             foreach ($context['fields'] as $field) {
                 if (!in_array($field['fieldname'], $availableFields)) {

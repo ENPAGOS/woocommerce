@@ -32,12 +32,12 @@ function dynamicore_update_options($data): bool
     return true;
 }
 
-function array_find($fields, $prop, $value)
-{
-    $index = array_search($value, array_column($fields, $prop));
+// function array_find($fields, $prop, $value)
+// {
+//     $index = array_search($value, array_column($fields, $prop));
 
-    return $fields[$index];
-}
+//     return $fields[$index];
+// }
 
 function dynamicore_config_page()
 {
@@ -74,18 +74,18 @@ function dynamicore_config_page()
         'tabs' => $tabs,
     ]] = json_decode($response->getBody(), true);
 
-    $businessLine = [];
-    $businessLine[] = [
-        'value' => '',
-        'label' => 'Selecciona',
-    ];
-    $businessLineOpt = array_find($fields, 'fieldname', 'giro_del_negocio')['options'];
-    foreach ($businessLineOpt as $val) {
-        $businessLine[] = [
-            'value' => $val['id'],
-            'label' => $val['name'],
-        ];
-    }
+    // $businessLine = [];
+    // $businessLine[] = [
+    //     'value' => '',
+    //     'label' => 'Selecciona',
+    // ];
+    // $businessLineOpt = array_find($fields, 'fieldname', 'giro_del_negocio')['options'];
+    // foreach ($businessLineOpt as $val) {
+    //     $businessLine[] = [
+    //         'value' => $val['id'],
+    //         'label' => $val['name'],
+    //     ];
+    // }
 
     $site_url = get_site_url();
     $context = [
@@ -121,17 +121,6 @@ function dynamicore_config_page()
                 ],
             ],
             # ============================================================================
-            [
-                'group' => 'general',
-                'label' => __('Giro del negocio', $dynamicore_plugin_name),
-                'name' => 'giro_del_negocio',
-                'type' => 'select',
-                'options' => $businessLine,
-                'value' => get_option(
-                    "{$dynamicore_plugin_name}_giro_del_negocio",
-                    ''
-                ),
-            ],
             [
                 'group' => 'general',
                 'label' => __('Distribuidor o tienda', $dynamicore_plugin_name),
