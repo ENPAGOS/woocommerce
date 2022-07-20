@@ -25,6 +25,24 @@ function dynamicore_after_product_price()
     $dynamicore_plugin_name = 'dynamicore';
     $product = wc_get_product(get_the_ID());
     $terms = get_the_terms(get_the_ID(), 'product_cat');
+    $attributes = $product->get_attributes();
+
+    $brand = '';
+    foreach ($attributes as $attribute) {
+        if ($attribute->get_variation()) {
+            continue;
+        }
+
+        $name = $attribute->get_name();
+
+        if ($name == 'pa_brand' && $attribute->is_taxonomy()) {
+            $brands = wp_get_post_terms($product->get_id(), $name, 'all');
+
+            if (count($brands) > 0) {
+                $brand = $brands[0]->name;
+            }
+        }
+    }
 
     $showAfterPrice = get_option(
         "{$dynamicore_plugin_name}_show_after_price",
@@ -75,6 +93,7 @@ function dynamicore_after_product_price()
                 : 'https://admin.dynamicore.io',
             'external_route' => '/public/integrations/enpagos?' . http_build_query([
                 'costo_de_producto' => $product->get_price(),
+                'marca' => $brand,
                 'nombre_de_asesor_de_ventas' => get_option(
                     "{$dynamicore_plugin_name}_nombre_de_asesor_de_ventas",
                     ''
